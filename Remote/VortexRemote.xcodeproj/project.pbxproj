@@ -218,6 +218,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Kitschpatrol;
 				TargetAttributes = {
+					2575B4EB19287D73002A4570 = {
+						DevelopmentTeam = EA6RRUEHHH;
+					};
 					2575B50F19287D73002A4570 = {
 						TestTargetID = 2575B4EB19287D73002A4570;
 					};
@@ -407,10 +410,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VortexRemote/VortexRemote-Prefix.pch";
 				INFOPLIST_FILE = "VortexRemote/VortexRemote-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -420,10 +426,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VortexRemote/VortexRemote-Prefix.pch";
 				INFOPLIST_FILE = "VortexRemote/VortexRemote-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -487,6 +496,7 @@
 				2575B52319287D73002A4570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2575B52419287D73002A4570 /* Build configuration list for PBXNativeTarget "VortexRemoteTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +505,7 @@
 				2575B52619287D73002A4570 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

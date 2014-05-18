@@ -82,7 +82,7 @@
     _blinkInterval = blinkInterval;
     
     // Send the message
-    NSString *message = [NSString stringWithFormat:@"b%i\n", self.blinkInterval];
+    NSString *message = [NSString stringWithFormat:@"b%lu\n", (unsigned long)self.blinkInterval];
     [self sendMessageToBle:message];
     
     [self updateInterfaceFromViewModel];
@@ -162,11 +162,11 @@
     self.drillSpeed = ((UIStepper *)sender).value;
 }
 
-- (IBAction)didStepBlinkInterval:(id)sender {
-    self.blinkInterval = pow(10, ((UIStepper *)sender).value); // Log
+- (IBAction)didChangeBlinkInterval:(id)sender {
+    self.blinkInterval = pow(10, ((UISlider *)sender).value); // Log
 }
 
-- (IBAction)didChangeBlinkInterval:(id)sender {
+- (IBAction)didStepBlinkInterval:(id)sender {
     self.blinkInterval = pow(10, ((UIStepper *)sender).value); // Log
 }
 
