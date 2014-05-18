@@ -23,6 +23,8 @@
 		2575B51C19287D73002A4570 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2575B51A19287D73002A4570 /* InfoPlist.strings */; };
 		2575B51E19287D73002A4570 /* VortexRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B51D19287D73002A4570 /* VortexRemoteTests.m */; };
 		2575B52B19287D88002A4570 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B52919287D88002A4570 /* BLE.m */; };
+		25DA9CC419293C630030A660 /* KPDrillSpeedRangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DA9CC319293C630030A660 /* KPDrillSpeedRangeViewController.m */; };
+		25DA9CC719293D6E0030A660 /* KPVortex.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DA9CC619293D6E0030A660 /* KPVortex.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		2575B52819287D88002A4570 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		2575B52919287D88002A4570 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
 		2575B52A19287D88002A4570 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
+		25DA9CC219293C630030A660 /* KPDrillSpeedRangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KPDrillSpeedRangeViewController.h; path = BLE/KPDrillSpeedRangeViewController.h; sourceTree = "<group>"; };
+		25DA9CC319293C630030A660 /* KPDrillSpeedRangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KPDrillSpeedRangeViewController.m; path = BLE/KPDrillSpeedRangeViewController.m; sourceTree = "<group>"; };
+		25DA9CC519293D6E0030A660 /* KPVortex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KPVortex.h; sourceTree = "<group>"; };
+		25DA9CC619293D6E0030A660 /* KPVortex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KPVortex.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,10 @@
 				2575B50419287D73002A4570 /* Main_iPad.storyboard */,
 				2575B50719287D73002A4570 /* KPViewController.h */,
 				2575B50819287D73002A4570 /* KPViewController.m */,
+				25DA9CC219293C630030A660 /* KPDrillSpeedRangeViewController.h */,
+				25DA9CC319293C630030A660 /* KPDrillSpeedRangeViewController.m */,
+				25DA9CC519293D6E0030A660 /* KPVortex.h */,
+				25DA9CC619293D6E0030A660 /* KPVortex.m */,
 				2575B50A19287D73002A4570 /* Images.xcassets */,
 				2575B4F619287D73002A4570 /* Supporting Files */,
 			);
@@ -274,7 +284,9 @@
 			files = (
 				2575B50919287D73002A4570 /* KPViewController.m in Sources */,
 				2575B4FC19287D73002A4570 /* main.m in Sources */,
+				25DA9CC719293D6E0030A660 /* KPVortex.m in Sources */,
 				2575B50019287D73002A4570 /* KPAppDelegate.m in Sources */,
+				25DA9CC419293C630030A660 /* KPDrillSpeedRangeViewController.m in Sources */,
 				2575B52B19287D88002A4570 /* BLE.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
