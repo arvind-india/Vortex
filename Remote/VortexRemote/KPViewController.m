@@ -29,38 +29,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //   [self addObserver:self forKeyPath:@"self.bleMini.activePeripheral.state" options:0 context:NULL];
-    //[self addObserver:self forKeyPath:@"self.bleMini.activePeripheral.state" options:0 context:NULL];
- 
+    
     [[KPVortex defaultVortex] addObserver:self forKeyPath:@"blinkInterval" options:0 context:NULL];
     [[KPVortex defaultVortex] addObserver:self forKeyPath:@"drillSpeed" options:0 context:NULL];
+    [[KPVortex defaultVortex] addObserver:self forKeyPath:@"connectionState" options:0 context:NULL];
+    
+    [self updateInterfaceFromViewModel];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    //[self removeObserver:self forKeyPath:@"self.bleMini.activePeripheral.state"];
-
+    
     [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"blinkInterval"];
     [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"drillSpeed"];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"connectionState"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    NSLog(@"Value change for key path: %@", keyPath);
     [self updateInterfaceFromViewModel];
 }
 
 
 #pragma mark - Event handling
+
+- (IBAction)connect:(id)sender {
+    [[KPVortex defaultVortex] connect];
+    self.connectionLabel.text = @"Connecting";
+}
 
 - (IBAction)didChangeDrillSpeed:(id)sender {
     [KPVortex defaultVortex].drillSpeed = ((UISlider *)sender).value;
@@ -82,7 +82,7 @@
     self.drillSpeedLabel.text = [NSString stringWithFormat:@"%i%%", (NSUInteger)([KPVortex defaultVortex].drillSpeed * 100)];
     self.drillSpeedStepper.value = [KPVortex defaultVortex].drillSpeed;
     self.drillSpeedSlider.value = [KPVortex defaultVortex].drillSpeed;
-
+    
     NSString *blinkLabel;
     if ([KPVortex defaultVortex].blinkInterval < 1000) {
         blinkLabel = [NSString stringWithFormat:@"%iµs", [KPVortex defaultVortex].blinkInterval];
@@ -97,22 +97,21 @@
     self.blinkIntervalLabel.text = blinkLabel;
     self.blinkIntervalStepper.value = log([KPVortex defaultVortex].blinkInterval) / log(10); // cope with log scale
     self.blinkIntervalSlider.value = log([KPVortex defaultVortex].blinkInterval) / log(10); // cope with log scale
-
-//    if (self.bleMini.activePeripheral.state == CBPeripheralStateConnected) {
-//        self.connectionLabel.text = @"Connected";
-//    }
-//    else if (self.bleMini.activePeripheral.state == CBPeripheralStateConnecting) {
-//        self.connectionLabel.text = @"Searching";
-//    }
-//    else {
-//       self.connectionLabel.text = @"Disconnected";
-//    }
     
-    //self.connectionLabel.text = (self.bleMini.activePeripheral.state == CBPeripheralStateConnected) ? @"Connected" : @"Disconnected";
-    
-    self.connectionLabel.text = @"TODO";
+    if ([KPVortex defaultVortex].connectionState == CBPeripheralStateConnected) {
+        self.connectionLabel.text = @"Connected";
+    }
+    else if ([KPVortex defaultVortex].connectionState == CBPeripheralStateConnecting) {
+        self.connectionLabel.text = @"Searching";
+    }
+    else if ([KPVortex defaultVortex].connectionState == CBPeripheralStateDisconnected) {
+        self.connectionLabel.text = @"Disconnected";
+    }
+    else {
+        self.connectionLabel.text = @"";
+    }
 }
 
-     
+
 
 @end

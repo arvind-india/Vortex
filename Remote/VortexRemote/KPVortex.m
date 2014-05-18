@@ -36,8 +36,20 @@
         _bleMini = [[BLE alloc] init];
         [_bleMini controlSetup];
         _bleMini.delegate = self;
+        
+        [_bleMini addObserver:self forKeyPath:@"activePeripheral.state" options:0 context:NULL];
     }
     return self;
+}
+
+- (void)dealloc {
+    [_bleMini removeObserver:self forKeyPath:@"activePeripheral.state"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"activePeripheral.state"]) {
+        self.connectionState = self.bleMini.activePeripheral.state;
+    }
 }
 
 # pragma mark - BLEDelegate
@@ -68,7 +80,7 @@
     }
 }
 
-- (IBAction)BLEShieldScan:(id)sender {
+- (void)BLEShieldScan {
     if (self.bleMini.activePeripheral)
         if(self.bleMini.activePeripheral.state == CBPeripheralStateConnected)
         {
@@ -111,8 +123,6 @@
     // Send the message
     NSString *message = [NSString stringWithFormat:@"d%.4f\n", self.drillSpeed];
     [self sendMessageToBle:message];
-    
-    //[self updateInterfaceFromViewModel];
 }
 
 - (void)setBlinkInterval:(NSUInteger)blinkInterval {
@@ -121,13 +131,11 @@
     // Send the message
     NSString *message = [NSString stringWithFormat:@"b%lu\n", (unsigned long)self.blinkInterval];
     [self sendMessageToBle:message];
-    
-    //[self updateInterfaceFromViewModel];
 }
 
 
 - (void)connect {
-    
+    [self BLEShieldScan];
 }
 
 - (void)disconnect {
