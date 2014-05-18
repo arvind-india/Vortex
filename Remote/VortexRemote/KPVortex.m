@@ -32,6 +32,8 @@
     if (self) {
         _blinkInterval = 0.0;
         _drillSpeed = 0.0;
+        _drillSpeedMinimum = 0.0;
+        _drillSpeedMaximum = 1.0;
         
         _bleMini = [[BLE alloc] init];
         [_bleMini controlSetup];

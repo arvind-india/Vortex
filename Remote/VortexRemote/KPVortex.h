@@ -19,5 +19,7 @@
 
 @property (nonatomic, assign) NSUInteger blinkInterval;
 @property (nonatomic, assign) CGFloat drillSpeed;
+@property (nonatomic, assign) CGFloat drillSpeedMinimum;
+@property (nonatomic, assign) CGFloat drillSpeedMaximum;
 
 @end

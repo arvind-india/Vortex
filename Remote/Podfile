@@ -1,0 +1,5 @@
+platform :ios, :deployment_target => "7.0"
+
+pod 'KPKit', :git => 'https://github.com/kitschpatrol/KPKit.git'
+
+link_with ['VortexRemote', 'VortexRemoteTests']
