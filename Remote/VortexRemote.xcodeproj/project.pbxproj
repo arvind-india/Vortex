@@ -1,0 +1,502 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2575B4F019287D73002A4570 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2575B4EF19287D73002A4570 /* Foundation.framework */; };
+		2575B4F219287D73002A4570 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2575B4F119287D73002A4570 /* CoreGraphics.framework */; };
+		2575B4F419287D73002A4570 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2575B4F319287D73002A4570 /* UIKit.framework */; };
+		2575B4FA19287D73002A4570 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2575B4F819287D73002A4570 /* InfoPlist.strings */; };
+		2575B4FC19287D73002A4570 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B4FB19287D73002A4570 /* main.m */; };
+		2575B50019287D73002A4570 /* KPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B4FF19287D73002A4570 /* KPAppDelegate.m */; };
+		2575B50319287D73002A4570 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2575B50119287D73002A4570 /* Main_iPhone.storyboard */; };
+		2575B50619287D73002A4570 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2575B50419287D73002A4570 /* Main_iPad.storyboard */; };
+		2575B50919287D73002A4570 /* KPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B50819287D73002A4570 /* KPViewController.m */; };
+		2575B50B19287D73002A4570 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2575B50A19287D73002A4570 /* Images.xcassets */; };
+		2575B51219287D73002A4570 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2575B51119287D73002A4570 /* XCTest.framework */; };
+		2575B51319287D73002A4570 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2575B4EF19287D73002A4570 /* Foundation.framework */; };
+		2575B51419287D73002A4570 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2575B4F319287D73002A4570 /* UIKit.framework */; };
+		2575B51C19287D73002A4570 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2575B51A19287D73002A4570 /* InfoPlist.strings */; };
+		2575B51E19287D73002A4570 /* VortexRemoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B51D19287D73002A4570 /* VortexRemoteTests.m */; };
+		2575B52B19287D88002A4570 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 2575B52919287D88002A4570 /* BLE.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2575B51519287D73002A4570 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2575B4E419287D73002A4570 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2575B4EB19287D73002A4570;
+			remoteInfo = VortexRemote;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2575B4EC19287D73002A4570 /* VortexRemote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VortexRemote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2575B4EF19287D73002A4570 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2575B4F119287D73002A4570 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2575B4F319287D73002A4570 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2575B4F719287D73002A4570 /* VortexRemote-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VortexRemote-Info.plist"; sourceTree = "<group>"; };
+		2575B4F919287D73002A4570 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2575B4FB19287D73002A4570 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2575B4FD19287D73002A4570 /* VortexRemote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VortexRemote-Prefix.pch"; sourceTree = "<group>"; };
+		2575B4FE19287D73002A4570 /* KPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPAppDelegate.h; sourceTree = "<group>"; };
+		2575B4FF19287D73002A4570 /* KPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KPAppDelegate.m; sourceTree = "<group>"; };
+		2575B50219287D73002A4570 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		2575B50519287D73002A4570 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		2575B50719287D73002A4570 /* KPViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPViewController.h; sourceTree = "<group>"; };
+		2575B50819287D73002A4570 /* KPViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KPViewController.m; sourceTree = "<group>"; };
+		2575B50A19287D73002A4570 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2575B51019287D73002A4570 /* VortexRemoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VortexRemoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2575B51119287D73002A4570 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2575B51919287D73002A4570 /* VortexRemoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VortexRemoteTests-Info.plist"; sourceTree = "<group>"; };
+		2575B51B19287D73002A4570 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2575B51D19287D73002A4570 /* VortexRemoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VortexRemoteTests.m; sourceTree = "<group>"; };
+		2575B52819287D88002A4570 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
+		2575B52919287D88002A4570 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
+		2575B52A19287D88002A4570 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2575B4E919287D73002A4570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2575B4F219287D73002A4570 /* CoreGraphics.framework in Frameworks */,
+				2575B4F419287D73002A4570 /* UIKit.framework in Frameworks */,
+				2575B4F019287D73002A4570 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2575B50D19287D73002A4570 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2575B51219287D73002A4570 /* XCTest.framework in Frameworks */,
+				2575B51419287D73002A4570 /* UIKit.framework in Frameworks */,
+				2575B51319287D73002A4570 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2575B4E319287D73002A4570 = {
+			isa = PBXGroup;
+			children = (
+				2575B4F519287D73002A4570 /* VortexRemote */,
+				2575B51719287D73002A4570 /* VortexRemoteTests */,
+				2575B4EE19287D73002A4570 /* Frameworks */,
+				2575B4ED19287D73002A4570 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2575B4ED19287D73002A4570 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2575B4EC19287D73002A4570 /* VortexRemote.app */,
+				2575B51019287D73002A4570 /* VortexRemoteTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2575B4EE19287D73002A4570 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2575B4EF19287D73002A4570 /* Foundation.framework */,
+				2575B4F119287D73002A4570 /* CoreGraphics.framework */,
+				2575B4F319287D73002A4570 /* UIKit.framework */,
+				2575B51119287D73002A4570 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2575B4F519287D73002A4570 /* VortexRemote */ = {
+			isa = PBXGroup;
+			children = (
+				2575B52719287D88002A4570 /* BLE */,
+				2575B4FE19287D73002A4570 /* KPAppDelegate.h */,
+				2575B4FF19287D73002A4570 /* KPAppDelegate.m */,
+				2575B50119287D73002A4570 /* Main_iPhone.storyboard */,
+				2575B50419287D73002A4570 /* Main_iPad.storyboard */,
+				2575B50719287D73002A4570 /* KPViewController.h */,
+				2575B50819287D73002A4570 /* KPViewController.m */,
+				2575B50A19287D73002A4570 /* Images.xcassets */,
+				2575B4F619287D73002A4570 /* Supporting Files */,
+			);
+			path = VortexRemote;
+			sourceTree = "<group>";
+		};
+		2575B4F619287D73002A4570 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2575B4F719287D73002A4570 /* VortexRemote-Info.plist */,
+				2575B4F819287D73002A4570 /* InfoPlist.strings */,
+				2575B4FB19287D73002A4570 /* main.m */,
+				2575B4FD19287D73002A4570 /* VortexRemote-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2575B51719287D73002A4570 /* VortexRemoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				2575B51D19287D73002A4570 /* VortexRemoteTests.m */,
+				2575B51819287D73002A4570 /* Supporting Files */,
+			);
+			path = VortexRemoteTests;
+			sourceTree = "<group>";
+		};
+		2575B51819287D73002A4570 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2575B51919287D73002A4570 /* VortexRemoteTests-Info.plist */,
+				2575B51A19287D73002A4570 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2575B52719287D88002A4570 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				2575B52819287D88002A4570 /* BLE.h */,
+				2575B52919287D88002A4570 /* BLE.m */,
+				2575B52A19287D88002A4570 /* BLEDefines.h */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2575B4EB19287D73002A4570 /* VortexRemote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2575B52119287D73002A4570 /* Build configuration list for PBXNativeTarget "VortexRemote" */;
+			buildPhases = (
+				2575B4E819287D73002A4570 /* Sources */,
+				2575B4E919287D73002A4570 /* Frameworks */,
+				2575B4EA19287D73002A4570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VortexRemote;
+			productName = VortexRemote;
+			productReference = 2575B4EC19287D73002A4570 /* VortexRemote.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2575B50F19287D73002A4570 /* VortexRemoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2575B52419287D73002A4570 /* Build configuration list for PBXNativeTarget "VortexRemoteTests" */;
+			buildPhases = (
+				2575B50C19287D73002A4570 /* Sources */,
+				2575B50D19287D73002A4570 /* Frameworks */,
+				2575B50E19287D73002A4570 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2575B51619287D73002A4570 /* PBXTargetDependency */,
+			);
+			name = VortexRemoteTests;
+			productName = VortexRemoteTests;
+			productReference = 2575B51019287D73002A4570 /* VortexRemoteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2575B4E419287D73002A4570 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KP;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Kitschpatrol;
+				TargetAttributes = {
+					2575B50F19287D73002A4570 = {
+						TestTargetID = 2575B4EB19287D73002A4570;
+					};
+				};
+			};
+			buildConfigurationList = 2575B4E719287D73002A4570 /* Build configuration list for PBXProject "VortexRemote" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2575B4E319287D73002A4570;
+			productRefGroup = 2575B4ED19287D73002A4570 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2575B4EB19287D73002A4570 /* VortexRemote */,
+				2575B50F19287D73002A4570 /* VortexRemoteTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2575B4EA19287D73002A4570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2575B50619287D73002A4570 /* Main_iPad.storyboard in Resources */,
+				2575B50B19287D73002A4570 /* Images.xcassets in Resources */,
+				2575B50319287D73002A4570 /* Main_iPhone.storyboard in Resources */,
+				2575B4FA19287D73002A4570 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2575B50E19287D73002A4570 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2575B51C19287D73002A4570 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2575B4E819287D73002A4570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2575B50919287D73002A4570 /* KPViewController.m in Sources */,
+				2575B4FC19287D73002A4570 /* main.m in Sources */,
+				2575B50019287D73002A4570 /* KPAppDelegate.m in Sources */,
+				2575B52B19287D88002A4570 /* BLE.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2575B50C19287D73002A4570 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2575B51E19287D73002A4570 /* VortexRemoteTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2575B51619287D73002A4570 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2575B4EB19287D73002A4570 /* VortexRemote */;
+			targetProxy = 2575B51519287D73002A4570 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2575B4F819287D73002A4570 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2575B4F919287D73002A4570 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2575B50119287D73002A4570 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2575B50219287D73002A4570 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		2575B50419287D73002A4570 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2575B50519287D73002A4570 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		2575B51A19287D73002A4570 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2575B51B19287D73002A4570 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2575B51F19287D73002A4570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2575B52019287D73002A4570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2575B52219287D73002A4570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VortexRemote/VortexRemote-Prefix.pch";
+				INFOPLIST_FILE = "VortexRemote/VortexRemote-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2575B52319287D73002A4570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VortexRemote/VortexRemote-Prefix.pch";
+				INFOPLIST_FILE = "VortexRemote/VortexRemote-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2575B52519287D73002A4570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VortexRemote.app/VortexRemote";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VortexRemote/VortexRemote-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "VortexRemoteTests/VortexRemoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		2575B52619287D73002A4570 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VortexRemote.app/VortexRemote";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VortexRemote/VortexRemote-Prefix.pch";
+				INFOPLIST_FILE = "VortexRemoteTests/VortexRemoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2575B4E719287D73002A4570 /* Build configuration list for PBXProject "VortexRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2575B51F19287D73002A4570 /* Debug */,
+				2575B52019287D73002A4570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2575B52119287D73002A4570 /* Build configuration list for PBXNativeTarget "VortexRemote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2575B52219287D73002A4570 /* Debug */,
+				2575B52319287D73002A4570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2575B52419287D73002A4570 /* Build configuration list for PBXNativeTarget "VortexRemoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2575B52519287D73002A4570 /* Debug */,
+				2575B52619287D73002A4570 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2575B4E419287D73002A4570 /* Project object */;
+}
