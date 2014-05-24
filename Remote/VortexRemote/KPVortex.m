@@ -7,6 +7,7 @@
 //
 
 #import "KPVortex.h"
+#import "KPKit.h"
 #import "BLE.h"
 
 const char SET_DRILL_SPEED = 'a'; // float from 0 to 1
@@ -19,6 +20,8 @@ const char SET_LED = 'e'; // XXX address XXX red XXX green XXX blue
 const char SET_LEDS_ALL_HUE = 'f'; // XXX hue // TODO
 const char SET_LEDS_ALL_SATURATION = 'g'; // XXX sat // TODO
 const char SET_LEDS_ALL_BRIGHTNESS = 'h'; // XXX bright // TODO
+
+
 
 
 const NSUInteger ledRows = 16;
@@ -48,7 +51,7 @@ const NSUInteger ledColumns = 16;
         _drawLoopDuration = 0.0;
         _drillSpeed = 0.0;
         _drillSpeedMinimum = 0.0;
-        _drillSpeedMaximum = 1.0;
+        _drillSpeedMaximum = 0.75;
         
         _bleMini = [[BLE alloc] init];
         [_bleMini controlSetup];
@@ -135,15 +138,16 @@ const NSUInteger ledColumns = 16;
 
 - (void)setDrillSpeed:(CGFloat)drillSpeed {
     _drillSpeed = drillSpeed;
-    
+  
     // Send the message
-    NSString *message = [NSString stringWithFormat:@"%c%.4f\n", SET_DRILL_SPEED, self.drillSpeed];
+    CGFloat clampedDrillSpeed = KPMap(self.drillSpeed, (CGFloat)0.0, (CGFloat)1.0, self.drillSpeedMinimum, self.drillSpeedMaximum);
+    NSString *message = [NSString stringWithFormat:@"%c%.4f\n", SET_DRILL_SPEED, clampedDrillSpeed];
     [self sendMessageToBle:message];
 }
 
 - (void)setDrawLoopDuration:(NSUInteger)blinkInterval {
     _drawLoopDuration = blinkInterval;
-    
+
     // Send the message
     NSString *message = [NSString stringWithFormat:@"%c%lu\n", SET_LED_DRAW_LOOP_DURATION, (unsigned long)self.drawLoopDuration];
     [self sendMessageToBle:message];

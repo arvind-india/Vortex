@@ -13,6 +13,9 @@
 #import "KPButton.h"
 #import "KPSlider.h"
 
+const CGFloat minLoopDurationMicros = 31622;
+const CGFloat maxDurationMicros = 1000000;
+
 @interface KPViewController () <KPButtonPadDelegate>
 
 // Controls
@@ -88,12 +91,14 @@
 }
 
 
+
+
 - (IBAction)didChangeDrawLoopDuration:(id)sender {
   if (self.drawLoopDurationSlider.currentValue == 0) {
     [KPVortex defaultVortex].drawLoopDuration = 0;
   }
   else {
-    [KPVortex defaultVortex].drawLoopDuration = pow(10, self.drawLoopDurationSlider.currentValue * 6); // Log
+    //[KPVortex defaultVortex].drawLoopDuration = pow(10, self.drawLoopDurationSlider.currentValue * 6); // Log
   }
   
   
