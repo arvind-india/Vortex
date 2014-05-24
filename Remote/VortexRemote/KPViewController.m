@@ -22,7 +22,9 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
 
 // Controls
 
-@property (strong, nonatomic) UIColor *ledColor;
+
+@property (nonatomic, assign) CGFloat hue;
+@property (nonatomic, assign) CGFloat saturation;
 
 @property (weak, nonatomic) IBOutlet KPSlider *drawLoopDurationSlider;
 @property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
@@ -50,13 +52,14 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
   self.buttonGrid.delegate = self;
 //  [self.view addSubview:self.buttonGrid];
   
-  _ledColor = [UIColor whiteColor];
-
+  _hue = 0.0;
+  _saturation = 0.0;
   
   
   self.drawLoopDurationSlider.sliderName = @"Time Scale";
   self.drillSpeedSlider.sliderName = @"Rotation Speed";
   self.connectionButton.buttonName = @"Connect";
+  self.saturationSlider.sliderName = @"Saturation";
   self.allOffButton.buttonName = @"Clear";
   self.allOnButton.buttonName = @"All On";
   
@@ -118,23 +121,13 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
 }
 
 - (IBAction)didChangeHue:(id)sender {
-  
-  if (self.hueSlider.currentValue == 0) {
-    self.ledColor = [UIColor whiteColor];
-  }
-  else {
-    CGFloat targetHue = self.hueSlider.currentValue + 0.5;
-
-    // Wrap it
-    if (targetHue > 1.0) targetHue = targetHue - 1.0;
-    
-    self.ledColor = [UIColor colorWithHue:targetHue saturation:1.0 brightness:1.0 alpha:1.0];
-  }
-  
-  self.hueSlider.backgroundColor = self.ledColor;
+  self.hue = self.hueSlider.currentValue;
+  self.hueSlider.backgroundColor = [UIColor colorWithHue:self.hue saturation:1.0 brightness:1.0 alpha:1.0];
 }
 
 - (IBAction)didChangeSaturation:(id)sender {
+  self.saturation = self.saturationSlider.currentValue;
+  self.saturationSlider.backgroundColor = [UIColor colorWithHue:self.hue saturation:self.saturation brightness:1.0 alpha:1.0];
 }
 
 - (void)updateInterfaceFromViewModel {
@@ -186,7 +179,8 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
 
 
 -(void)didActivateGridLocation:(CGPoint)point {
-  [[KPVortex defaultVortex] setLEDatPosition:point toColor:self.ledColor];
+  UIColor *ledColor = [UIColor colorWithHue:self.hue saturation:self.saturation brightness:1.0 alpha:1.0];
+  [[KPVortex defaultVortex] setLEDatPosition:point toColor:ledColor];
 }
 
 
