@@ -27,6 +27,7 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
 @property (weak, nonatomic) IBOutlet KPSlider *drawLoopDurationSlider;
 @property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
 @property (weak, nonatomic) IBOutlet KPSlider *hueSlider;
+@property (weak, nonatomic) IBOutlet KPSlider *saturationSlider;
 
 @property (weak, nonatomic) IBOutlet KPButton *connectionButton;
 @property (weak, nonatomic) IBOutlet UILabel *connectionLabel;
@@ -133,6 +134,8 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
   self.hueSlider.backgroundColor = self.ledColor;
 }
 
+- (IBAction)didChangeSaturation:(id)sender {
+}
 
 - (void)updateInterfaceFromViewModel {
 
