@@ -9,6 +9,18 @@
 #import "KPVortex.h"
 #import "BLE.h"
 
+const char SET_DRILL_SPEED = 'a'; // float from 0 to 1
+
+const char SET_LED_BLINK_INTERVAL = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second // deprecated?
+const char SET_LEDS_ALL_ON = 'c'; // no params
+const char SET_LEDS_ALL_OFF = 'd'; // no params
+const char SET_LED = 'e'; // XXX address XXX red XXX green XXX blue
+
+
+const char SET_LEDS_ALL_HUE = 'f'; // XXX hue // TODO
+const char SET_LEDS_ALL_SATURATION = 'g'; // XXX sat // TODO
+const char SET_LEDS_ALL_BRIGHTNESS = 'h'; // XXX bright // TODO
+
 
 const NSUInteger ledRows = 16;
 const NSUInteger ledColumns = 16;
@@ -126,7 +138,7 @@ const NSUInteger ledColumns = 16;
     _drillSpeed = drillSpeed;
     
     // Send the message
-    NSString *message = [NSString stringWithFormat:@"d%.4f\n", self.drillSpeed];
+    NSString *message = [NSString stringWithFormat:@"%c%.4f\n", SET_DRILL_SPEED, self.drillSpeed];
     [self sendMessageToBle:message];
 }
 
@@ -134,18 +146,18 @@ const NSUInteger ledColumns = 16;
     _blinkInterval = blinkInterval;
     
     // Send the message
-    NSString *message = [NSString stringWithFormat:@"b%lu\n", (unsigned long)self.blinkInterval];
+    NSString *message = [NSString stringWithFormat:@"%c%lu\n", SET_LED_BLINK_INTERVAL, (unsigned long)self.blinkInterval];
     [self sendMessageToBle:message];
 }
 
 - (void)setAllLEDsOn {
   // Send the message
-  NSString *message = [NSString stringWithFormat:@"o\n"];
+  NSString *message = [NSString stringWithFormat:@"%c\n", SET_LEDS_ALL_ON];
   [self sendMessageToBle:message];
 }
 
 - (void)setAllLEDsOff {
-  NSString *message = [NSString stringWithFormat:@"c\n"];
+  NSString *message = [NSString stringWithFormat:@"%c\n", SET_LEDS_ALL_OFF];
   [self sendMessageToBle:message];
 }
 
@@ -164,10 +176,8 @@ const NSUInteger ledColumns = 16;
   NSUInteger greenComponent = (NSUInteger)(g * 255.0);
   NSUInteger blueComponent = (NSUInteger)(b * 255.0);
   
-  NSString *message = [NSString stringWithFormat:@"s%03i%03i%03i%03i\n", index, redComponent, greenComponent, blueComponent];
-  
+  NSString *message = [NSString stringWithFormat:@"%c%03i%03i%03i%03i\n", SET_LED, index, redComponent, greenComponent, blueComponent];
   [self sendMessageToBle:message];
-  
 }
 
 

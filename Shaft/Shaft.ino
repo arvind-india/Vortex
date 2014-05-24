@@ -2,15 +2,15 @@
 // by Michal Rinott <http://people.interaction-ivrea.it/m.rinott> 
 
 // Inbound commands from iPad bluetooth
-const char SET_DRILL_SPEED = 'd'; // float from 0 to 1
+const char SET_DRILL_SPEED = 'a'; // float from 0 to 1
 const int SET_LED_BLINK_INTERVAL = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second
-const int SET_LEDS_ALL_ON = 'o'; // no params
-const int SET_LEDS_ALL_OFF = 'c'; // no params
-const int SET_LED = 's'; // XXX address XXX red XXX green XXX blue
+const int SET_LEDS_ALL_ON = 'c'; // no params
+const int SET_LEDS_ALL_OFF = 'd'; // no params
+const int SET_LED = 'e'; // XXX address XXX red XXX green XXX blue
 
-const int SET_LEDS_ALL_HUE = 'h'; // XXX hue
-const int SET_LEDS_ALL_SATURATION = 't'; // XXX sat
-const int SET_LEDS_ALL_BRIGHTNESS = 'r'; // XXX bright
+const int SET_LEDS_ALL_HUE = 'f'; // XXX hue
+const int SET_LEDS_ALL_SATURATION = 'g'; // XXX sat
+const int SET_LEDS_ALL_BRIGHTNESS = 'h'; // XXX bright
 
 
 // IF YOU CHANGE THESE NUMBERS YOU WILL DAMAGE THE SERVO!!!
@@ -39,6 +39,8 @@ int blinkIntervalMicroseconds;
 
 // This is an array of leds.  One item for each led in your strip.
 CRGB leds[NUM_LEDS];
+int ledSetTimes[NUM_LEDS]; // remember when they were written
+
 
 
 
