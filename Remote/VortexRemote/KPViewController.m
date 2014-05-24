@@ -16,19 +16,16 @@
 @interface KPViewController () <KPButtonPadDelegate>
 
 // Controls
+@property (weak, nonatomic) IBOutlet KPSlider *drawLoopDurationSlider;
+@property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
+
+@property (weak, nonatomic) IBOutlet KPButton *connectionButton;
 @property (weak, nonatomic) IBOutlet UILabel *connectionLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *drillSpeedLabel;
-@property (weak, nonatomic) IBOutlet UIStepper *drillSpeedStepper;
-
-@property (weak, nonatomic) IBOutlet UILabel *blinkIntervalLabel;
-@property (weak, nonatomic) IBOutlet UISlider *blinkIntervalSlider;
-@property (weak, nonatomic) IBOutlet UIStepper *blinkIntervalStepper;
-
-@property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
 @property (weak, nonatomic) IBOutlet KPButtonPad *buttonGrid;
 
 @property (weak, nonatomic) IBOutlet KPButton *allOffButton;
+@property (weak, nonatomic) IBOutlet KPButton *allOnButton;
 
 
 @end
@@ -43,6 +40,14 @@
   self.buttonGrid.delegate = self;
 //  [self.view addSubview:self.buttonGrid];
   
+  
+  self.drawLoopDurationSlider.sliderName = @"Loop Duration";
+  self.drillSpeedSlider.sliderName = @"Rotation Speed";
+  self.connectionButton.buttonName = @"Connect";
+  self.allOffButton.buttonName = @"Clear All";
+  self.allOnButton.buttonName = @"All On";
+  
+  
   [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
   
 }
@@ -50,7 +55,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[KPVortex defaultVortex] addObserver:self forKeyPath:@"blinkInterval" options:0 context:NULL];
+    [[KPVortex defaultVortex] addObserver:self forKeyPath:@"drawLoopDuration" options:0 context:NULL];
     [[KPVortex defaultVortex] addObserver:self forKeyPath:@"drillSpeed" options:0 context:NULL];
     [[KPVortex defaultVortex] addObserver:self forKeyPath:@"connectionState" options:0 context:NULL];
     
@@ -60,7 +65,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"blinkInterval"];
+    [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"drawLoopDuration"];
     [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"drillSpeed"];
     [[KPVortex defaultVortex] removeObserver:self forKeyPath:@"connectionState"];
 }
@@ -73,47 +78,39 @@
 
 #pragma mark - Event handling
 
-- (IBAction)connect:(id)sender {
+- (IBAction)didTouchConnectButton:(id)sender {
     [[KPVortex defaultVortex] connect];
     self.connectionLabel.text = @"Connecting";
 }
 
 - (IBAction)didChangeDrillSpeed:(id)sender {
-    [KPVortex defaultVortex].drillSpeed = ((UISlider *)sender).value;
+  [KPVortex defaultVortex].drillSpeed = self.drillSpeedSlider.currentValue;
 }
 
-- (IBAction)didStepDrillSpeed:(id)sender {
-    [KPVortex defaultVortex].drillSpeed = ((UIStepper *)sender).value;
+
+- (IBAction)didChangeDrawLoopDuration:(id)sender {
+  if (self.drawLoopDurationSlider.currentValue == 0) {
+    [KPVortex defaultVortex].drawLoopDuration = 0;
+  }
+  else {
+    [KPVortex defaultVortex].drawLoopDuration = pow(10, self.drawLoopDurationSlider.currentValue * 6); // Log
+  }
+  
+  
 }
 
-- (IBAction)didChangeBlinkInterval:(id)sender {
-    [KPVortex defaultVortex].blinkInterval = pow(10, ((UISlider *)sender).value); // Log
-}
 
-- (IBAction)didStepBlinkInterval:(id)sender {
-    [KPVortex defaultVortex].blinkInterval = pow(10, ((UIStepper *)sender).value); // Log
-}
 
 - (void)updateInterfaceFromViewModel {
-    self.drillSpeedLabel.text = [NSString stringWithFormat:@"%i%%", (NSUInteger)([KPVortex defaultVortex].drillSpeed * 100)];
-    self.drillSpeedStepper.value = [KPVortex defaultVortex].drillSpeed;
     self.drillSpeedSlider.currentValue = [KPVortex defaultVortex].drillSpeed;
-    
-    NSString *blinkLabel;
-    if ([KPVortex defaultVortex].blinkInterval < 1000) {
-        blinkLabel = [NSString stringWithFormat:@"%iµs", [KPVortex defaultVortex].blinkInterval];
-    }
-    else if ([KPVortex defaultVortex].blinkInterval < 1000000) {
-        blinkLabel = [NSString stringWithFormat:@"%.2fms", (CGFloat)[KPVortex defaultVortex].blinkInterval / 1000.0];
-    }
-    else {
-        blinkLabel = [NSString stringWithFormat:@"%.2fs", (CGFloat)[KPVortex defaultVortex].blinkInterval / 1000000.0];
-    }
-    
-    self.blinkIntervalLabel.text = blinkLabel;
-    self.blinkIntervalStepper.value = log([KPVortex defaultVortex].blinkInterval) / log(10); // cope with log scale
-    self.blinkIntervalSlider.value = log([KPVortex defaultVortex].blinkInterval) / log(10); // cope with log scale
-    
+  
+  if ([KPVortex defaultVortex].drawLoopDuration == 0) {
+    self.drawLoopDurationSlider.currentValue = 0;
+  }
+  else {
+    self.drawLoopDurationSlider.currentValue = (log([KPVortex defaultVortex].drawLoopDuration) / log(10)) / 6; // cope with log scale
+  }
+  
     if ([KPVortex defaultVortex].connectionState == CBPeripheralStateConnected) {
         self.connectionLabel.text = @"Connected";
     }
@@ -130,15 +127,15 @@
 
 
 
-- (IBAction)didTouchStepAndOnButton:(id)sender {
-  static NSUInteger indexStep = 0;
-  
-  UIColor *randomColor = [KPKit randomColorWithAlpha:1.0];
-  [[KPVortex defaultVortex] setLEDatIndex:indexStep toColor:randomColor];
-  
-  indexStep++;
-  indexStep %= 255;
-}
+//- (IBAction)didTouchStepAndOnButton:(id)sender {
+//  static NSUInteger indexStep = 0;
+//  
+//  UIColor *randomColor = [KPKit randomColorWithAlpha:1.0];
+//  [[KPVortex defaultVortex] setLEDatIndex:indexStep toColor:randomColor];
+//  
+//  indexStep++;
+//  indexStep %= 255;
+//}
 
 - (IBAction)didTouchAllOnButton:(id)sender {
   [[KPVortex defaultVortex] setAllLEDsOn];

@@ -25,16 +25,10 @@
                                 <state key="normal" title="Connect">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="connect:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9zP-q4-e87"/>
-                                </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="s0a-8t-Z9V">
                                 <rect key="frame" x="18" y="105" width="284" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="didChangeDrillSpeed:" destination="vXZ-lx-hvc" eventType="valueChanged" id="FHy-Wn-YIQ"/>
-                                </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drill Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dej-WB-YE4">
                                 <rect key="frame" x="20" y="75" width="84" height="21"/>
@@ -63,9 +57,6 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="6" translatesAutoresizingMaskIntoConstraints="NO" id="iw8-hu-LR4">
                                 <rect key="frame" x="18" y="222" width="284" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="didChangeBlinkInterval:" destination="vXZ-lx-hvc" eventType="valueChanged" id="Bqe-mM-ezD"/>
-                                </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blink Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nA-Hc-R9I">
                                 <rect key="frame" x="20" y="193" width="99" height="21"/>
@@ -84,16 +75,10 @@
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" maximumValue="1" stepValue="0.0050000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="66R-md-ybk">
                                 <rect key="frame" x="19" y="143" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="didStepDrillSpeed:" destination="vXZ-lx-hvc" eventType="valueChanged" id="siK-qd-nv6"/>
-                                </connections>
                             </stepper>
                             <stepper opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="6" stepValue="0.050000000000000003" translatesAutoresizingMaskIntoConstraints="NO" id="l9I-AY-Zus">
                                 <rect key="frame" x="16" y="260" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="didStepBlinkInterval:" destination="vXZ-lx-hvc" eventType="valueChanged" id="2Rf-tn-8JH"/>
-                                </connections>
                             </stepper>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6K-yJ-BHp">
                                 <rect key="frame" x="278" y="155" width="22" height="22"/>
@@ -111,9 +96,6 @@
                                 <state key="normal" title="Step and on">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="didTouchStepAndOnButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="uVe-wc-Lei"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIu-Ae-2b4">
                                 <rect key="frame" x="139" y="303" width="42" height="30"/>
@@ -121,9 +103,6 @@
                                 <state key="normal" title="All Off">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="didTouchAllOffButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Gzj-bI-HCs"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnh-Da-c6K">
                                 <rect key="frame" x="258" y="303" width="42" height="30"/>
@@ -131,9 +110,6 @@
                                 <state key="normal" title="All On">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="didTouchAllOnButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0UK-PY-BZs"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -165,15 +141,6 @@
                             <constraint firstItem="5nA-Hc-R9I" firstAttribute="leading" secondItem="Bxg-08-4bA" secondAttribute="leading" constant="1" id="vZW-vJ-jbs"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="blinkIntervalLabel" destination="3Ka-Vg-dvU" id="76N-oc-EGD"/>
-                        <outlet property="blinkIntervalSlider" destination="iw8-hu-LR4" id="T7r-j5-juw"/>
-                        <outlet property="blinkIntervalStepper" destination="l9I-AY-Zus" id="58p-7e-Xxl"/>
-                        <outlet property="connectionLabel" destination="FYi-nC-p3Q" id="l6l-zB-Li6"/>
-                        <outlet property="drillSpeedLabel" destination="QC4-mI-aW1" id="MQj-QU-qLy"/>
-                        <outlet property="drillSpeedSlider" destination="s0a-8t-Z9V" id="nfM-RX-cds"/>
-                        <outlet property="drillSpeedStepper" destination="66R-md-ybk" id="5db-Ea-rTi"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -217,7 +184,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="didChangeLowRange:" destination="HZz-WG-0HR" eventType="valueChanged" id="MPr-dp-iup"/>
-                                    <action selector="didStepDrillSpeed:" destination="vXZ-lx-hvc" eventType="valueChanged" id="wtb-dR-MaL"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" fixedFrame="YES" text="Max Speed:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r60-fG-uls">
@@ -239,7 +205,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <action selector="didChangeHighRange:" destination="HZz-WG-0HR" eventType="valueChanged" id="zD0-rQ-Xnh"/>
-                                    <action selector="didStepDrillSpeed:" destination="vXZ-lx-hvc" eventType="valueChanged" id="IHZ-T3-CnS"/>
                                 </connections>
                             </stepper>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Done" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rsb-am-spV">

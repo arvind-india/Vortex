@@ -10,8 +10,7 @@
 #import "BLE.h"
 
 const char SET_DRILL_SPEED = 'a'; // float from 0 to 1
-
-const char SET_LED_BLINK_INTERVAL = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second // deprecated?
+const char SET_LED_DRAW_LOOP_DURATION = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second // deprecated?
 const char SET_LEDS_ALL_ON = 'c'; // no params
 const char SET_LEDS_ALL_OFF = 'd'; // no params
 const char SET_LED = 'e'; // XXX address XXX red XXX green XXX blue
@@ -46,7 +45,7 @@ const NSUInteger ledColumns = 16;
 - (id)init {
     self = [super init];
     if (self) {
-        _blinkInterval = 0.0;
+        _drawLoopDuration = 0.0;
         _drillSpeed = 0.0;
         _drillSpeedMinimum = 0.0;
         _drillSpeedMaximum = 1.0;
@@ -142,11 +141,11 @@ const NSUInteger ledColumns = 16;
     [self sendMessageToBle:message];
 }
 
-- (void)setBlinkInterval:(NSUInteger)blinkInterval {
-    _blinkInterval = blinkInterval;
+- (void)setDrawLoopDuration:(NSUInteger)blinkInterval {
+    _drawLoopDuration = blinkInterval;
     
     // Send the message
-    NSString *message = [NSString stringWithFormat:@"%c%lu\n", SET_LED_BLINK_INTERVAL, (unsigned long)self.blinkInterval];
+    NSString *message = [NSString stringWithFormat:@"%c%lu\n", SET_LED_DRAW_LOOP_DURATION, (unsigned long)self.drawLoopDuration];
     [self sendMessageToBle:message];
 }
 

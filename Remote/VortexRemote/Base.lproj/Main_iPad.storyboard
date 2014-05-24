@@ -18,27 +18,64 @@
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="8cT-Mo-DPJ" customClass="KPSlider">
-                                <rect key="frame" x="20" y="813" width="303" height="44"/>
+                                <rect key="frame" x="20" y="792" width="551" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didChangeDrawLoopDuration:" destination="BYZ-38-t0r" eventType="valueChanged" id="VbS-yw-IQ8"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" id="mgM-Gw-RHA" customClass="KPSlider">
+                                <rect key="frame" x="20" y="960" width="551" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didChangeDrillSpeed:" destination="BYZ-38-t0r" eventType="valueChanged" id="aSc-Go-szK"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" id="zlm-KL-oqz" customClass="KPButton">
-                                <rect key="frame" x="595" y="813" width="153" height="44"/>
+                                <rect key="frame" x="595" y="792" width="153" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="didTouchAllOnButton:" destination="BYZ-38-t0r" eventType="touchDown" id="6wi-Kp-CHj"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" id="9R4-oU-6Vd" customClass="KPButton">
+                                <rect key="frame" x="595" y="844" width="153" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didTouchAllOffButton:" destination="BYZ-38-t0r" eventType="touchDown" id="6FS-sy-dLU"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" id="WRy-3J-zPq" customClass="KPButton">
+                                <rect key="frame" x="20" y="908" width="153" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didTouchConnectButton:" destination="BYZ-38-t0r" eventType="touchDown" id="Mup-Ub-grG"/>
+                                </connections>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connection Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dE9-kT-y5d">
+                                <rect key="frame" x="181" y="919" width="174" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="allOffButton" destination="zlm-KL-oqz" id="yi1-FA-BIQ"/>
+                        <outlet property="allOffButton" destination="9R4-oU-6Vd" id="1Dh-hx-J4X"/>
+                        <outlet property="allOnButton" destination="zlm-KL-oqz" id="K3a-9n-ADR"/>
                         <outlet property="buttonGrid" destination="FLl-P8-myb" id="RqX-pa-2kb"/>
-                        <outlet property="drillSpeedSlider" destination="8cT-Mo-DPJ" id="q2G-t1-JZs"/>
+                        <outlet property="connectionButton" destination="WRy-3J-zPq" id="zsU-XH-aia"/>
+                        <outlet property="connectionLabel" destination="dE9-kT-y5d" id="Btk-7n-iqS"/>
+                        <outlet property="drawLoopDurationSlider" destination="8cT-Mo-DPJ" id="Egb-Cc-JDY"/>
+                        <outlet property="drillSpeedSlider" destination="mgM-Gw-RHA" id="Pcs-pV-En2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
