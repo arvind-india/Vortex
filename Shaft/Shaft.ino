@@ -4,10 +4,12 @@
 
 // Inbound commands from iPad bluetooth
 const char SET_DRILL_SPEED = 'a'; // float from 0 to 1
-const char SET_LED_DRAW_LOOP_DURATION = 'b'; // int, microseconds of draw duration ... 1000 is a millisecond, 1000000 is a second.. BEWARE 70 MINUTE OVERFLOW
+const char SET_TIME_SCALE = 'b'; // float, percentage of actual duration
 const char SET_LEDS_ALL_ON = 'c'; // no params
 const char SET_LEDS_ALL_OFF = 'd'; // no params
 const char SET_LED = 'e'; // XXX address XXX red XXX green XXX blue
+
+
 
 const char SET_LEDS_ALL_HUE = 'f'; // XXX hue
 const char SET_LEDS_ALL_SATURATION = 'g'; // XXX sat
@@ -42,8 +44,8 @@ CRGB ledsView[NUM_LEDS]; // The "view" (what's actually displayed)
 unsigned long ledSetTimes[NUM_LEDS]; // remember when they were written... millis or micros!?
 unsigned long ledDrawLoopSetTimes[NUM_LEDS]; // optimization, scales set times to draw loop duration
 
-unsigned long drawLoopDuration; // microseconds
-
+float timeScale; // microseconds
+unsigned long scaledTimeRange; // generated
 
 Servo drillTriggerServo;  // create servo object to control a servo  
 
@@ -54,10 +56,8 @@ void setup() {
   allLEDsOff(); // Initializes model and time array
   
   // Initialize values
-  drawLoopDuration = 1000000; // one second
+  timeScale = 0.0;
   
-  setDrillSpeedNormalized(0.0);
-
   Serial1.begin(57600);
   drillTriggerServo.attach(SERVO_PIN);  // attaches the servo on pin 9 to the servo object
   
@@ -66,7 +66,7 @@ void setup() {
   Serial.println("Hello from the shaft.");
   #endif
 
-  
+  setDrillSpeedNormalized(0.0);  
 } 
  
 void loop() { 
@@ -76,7 +76,7 @@ void loop() {
 
 
 void updateLEDs() {
-  if (drawLoopDuration == 0) {
+  if (timeScale == 0) {
       // Draw whatever's in the model immediately    
       for (int i = 0; i < NUM_LEDS; i++) {
         ledsView[i] = ledsModel[i];
@@ -84,9 +84,9 @@ void updateLEDs() {
   }
   else {
     // Draw progressively
-    unsigned long drawLoopTime = micros() % drawLoopDuration;
+    unsigned long drawLoopTime = millis() % scaledTimeRange;
       for (int i = 0; i < NUM_LEDS; i++) {
-        if (ledDrawLoopSetTimes[i] > drawLoopTime) {
+        if (ledDrawLoopSetTimes[i] < drawLoopTime) {
                 ledsView[i] = ledsModel[i];
         }
         else {
@@ -133,11 +133,14 @@ void receivedPacket(String packet) {
       body.toCharArray(bodyChars, sizeof(bodyChars));
       float normalizedDrillSpeed = atof(bodyChars);
       setDrillSpeedNormalized(normalizedDrillSpeed);
-      //Serial1.println(normalizedDrillSpeed);
+      Serial.println(normalizedDrillSpeed);
       break;
     }
-    case SET_LED_DRAW_LOOP_DURATION: {
-      drawLoopDuration = body.toInt();
+    case SET_TIME_SCALE: {
+      char bodyChars[body.length()];
+      body.toCharArray(bodyChars, sizeof(bodyChars));
+      timeScale = atof(bodyChars);      
+      recalculateDrawLoopTimes();
       break;
     }
     case SET_LEDS_ALL_ON: {
@@ -155,7 +158,7 @@ void receivedPacket(String packet) {
       int blueValue = body.substring(9, 12).toInt();
       
       ledsModel[pixelAddress] = CRGB(redValue, greenValue, blueValue);
-      ledSetTimes[pixelAddress] = micros();
+      ledSetTimes[pixelAddress] = millis();
       recalculateDrawLoopTimes();
       
       break;
@@ -185,7 +188,7 @@ void setDrillSpeedNormalized(float drillSpeed) {
 }  
 
 void allLEDsOn() {
-  unsigned long ledSetTime = micros();
+  unsigned long ledSetTime = millis();
   
   for(int i = 0; i < NUM_LEDS; i++) {
     ledsModel[i]  = CRGB::White;
@@ -201,6 +204,9 @@ void allLEDsOff() {
   }
   recalculateDrawLoopTimes();  
 }
+
+
+
 
 void recalculateDrawLoopTimes() {
   // find limits of drawing
@@ -222,17 +228,16 @@ void recalculateDrawLoopTimes() {
   for (int i = 0; i < NUM_LEDS; i++) {
     if (ledSetTimes[i] > 0) {
 
-
-       
-      
-      
-      
           unsigned long timeSinceStart = ledSetTimes[i] - ledSetTimeOldest;
         unsigned long totalTimeRange = ledSetTimeNewest - ledSetTimeOldest;
-      double timePercent = (double)timeSinceStart / (double)totalTimeRange;
-      unsigned long drawLoopTime = (unsigned long)(timePercent * (double)drawLoopDuration);
+      double timePercent = ((double)timeSinceStart / (double)totalTimeRange);
+      unsigned long drawLoopTime = (unsigned long)(timePercent * ((double)totalTimeRange) * timeScale);
+
+      scaledTimeRange = (unsigned long)((double)totalTimeRange * timeScale);
 
       #ifdef DEBUG
+            Serial.print("Time scale: ");      
+      Serial.println(timeScale);
             Serial.print("Mapping time : ");
             Serial.print(ledSetTimes[i]);      
             Serial.print(" from Oldest: ");
@@ -251,8 +256,6 @@ void recalculateDrawLoopTimes() {
             Serial.print("drawLoopTime ");             
             Serial.println(drawLoopTime);                 
             
-            Serial.print("drawLoopDuration ");             
-            Serial.println(drawLoopDuration);     
        #endif   
       
       ledDrawLoopSetTimes[i] = drawLoopTime;

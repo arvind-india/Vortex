@@ -17,7 +17,7 @@
 
 @property (nonatomic, assign) CBPeripheralState connectionState;
 
-@property (nonatomic, assign) NSUInteger drawLoopDuration;
+@property (nonatomic, assign) CGFloat timeScale;
 @property (nonatomic, assign) CGFloat drillSpeed;
 @property (nonatomic, assign) CGFloat drillSpeedMinimum;
 @property (nonatomic, assign) CGFloat drillSpeedMaximum;

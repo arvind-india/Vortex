@@ -7,6 +7,8 @@
 //
 
 #import "KPButtonPad.h"
+@import QuartzCore;
+
 
 
 const int rows = 16;
@@ -18,6 +20,7 @@ int gridState[rows][cols];
 @interface KPButtonPad ()
 
 @property (nonatomic, assign) BOOL isTouched;
+//@property (nonatomic, strong) NSArray *gridCells;
 
 @end
 
@@ -53,6 +56,13 @@ int gridState[rows][cols];
       gridState[x][y] = 0;
     }
   }
+  
+//  NSMutableArray *tempGridCells = [@[] mutableCopy];
+//  for (int i = 0; i < cols * rows; i++) {
+//    
+//    CALayer gridCell = [CALayer layer];
+//  }
+  
 }
 
 
@@ -65,18 +75,21 @@ int gridState[rows][cols];
   for (int x = 0; x < cols; x++) {
     for (int y = 0; y < rows; y++) {
       
+      if (gridState[x][y] == 1) {
+      
       CGRect gridCellRect = CGRectMake(x * gridCellWidth, y * gridCellHeight, gridCellWidth, gridCellHeight);
       gridCellRect = CGRectInset(gridCellRect, 2, 2);
-      
+        
       UIBezierPath *gridCell = [UIBezierPath bezierPathWithRoundedRect:gridCellRect cornerRadius:6];
-      
-      if (gridState[x][y] == 0) {
-        [self.colorUp setFill];
-      }
-      else {
-        [self.colorDown setFill];
-      }
+      [self.colorDown setFill];
+//      if (gridState[x][y] == 0) {
+//        [self.colorUp setFill];
+//      }
+//      else {
+//        [self.colorDown setFill];
+//      }
       [gridCell fill];
+      }
     }
   }
 }

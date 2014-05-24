@@ -11,7 +11,7 @@
 #import "BLE.h"
 
 const char SET_DRILL_SPEED = 'a'; // float from 0 to 1
-const char SET_LED_DRAW_LOOP_DURATION = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second // deprecated?
+const char SET_TIME_SCALE = 'b'; // float from 0 to 1
 const char SET_LEDS_ALL_ON = 'c'; // no params
 const char SET_LEDS_ALL_OFF = 'd'; // no params
 const char SET_LED = 'e'; // XXX address XXX red XXX green XXX blue
@@ -48,7 +48,7 @@ const NSUInteger ledColumns = 16;
 - (id)init {
     self = [super init];
     if (self) {
-        _drawLoopDuration = 0.0;
+        _timeScale = 0.0;
         _drillSpeed = 0.0;
         _drillSpeedMinimum = 0.0;
         _drillSpeedMaximum = 0.75;
@@ -145,11 +145,11 @@ const NSUInteger ledColumns = 16;
     [self sendMessageToBle:message];
 }
 
-- (void)setDrawLoopDuration:(NSUInteger)blinkInterval {
-    _drawLoopDuration = blinkInterval;
+- (void)setTimeScale:(CGFloat)timeScale {
+  _timeScale = timeScale;
 
     // Send the message
-    NSString *message = [NSString stringWithFormat:@"%c%lu\n", SET_LED_DRAW_LOOP_DURATION, (unsigned long)self.drawLoopDuration];
+    NSString *message = [NSString stringWithFormat:@"%c%.5f\n", SET_TIME_SCALE, self.timeScale];
     [self sendMessageToBle:message];
 }
 
@@ -175,9 +175,10 @@ const NSUInteger ledColumns = 16;
   CGFloat r, g, b, a;
   [color getRed:&r green:&g blue:&b alpha:&a];
   
-  NSUInteger redComponent = (NSUInteger)(r * 255.0);
-  NSUInteger greenComponent = (NSUInteger)(g * 255.0);
-  NSUInteger blueComponent = (NSUInteger)(b * 255.0);
+#warning WTF, GRB instead of RGB?
+  int redComponent = (int)(g * 255.0);
+  int greenComponent = (int)(r * 255.0);
+  int blueComponent = (int)(b * 255.0);
   
   NSString *message = [NSString stringWithFormat:@"%c%03i%03i%03i%03i\n", SET_LED, index, redComponent, greenComponent, blueComponent];
   [self sendMessageToBle:message];

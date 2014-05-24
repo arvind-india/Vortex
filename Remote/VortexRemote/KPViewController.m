@@ -13,14 +13,20 @@
 #import "KPButton.h"
 #import "KPSlider.h"
 
-const CGFloat minLoopDurationMicros = 31622;
-const CGFloat maxDurationMicros = 1000000;
+const CGFloat minLoopDurationMicros =  250000; // quarter second
+const CGFloat maxLoopDurationMicros = 3000000; // three seconds
+
+const CGFloat drawLoopDurationMultiplier = 1.0;
 
 @interface KPViewController () <KPButtonPadDelegate>
 
 // Controls
+
+@property (strong, nonatomic) UIColor *ledColor;
+
 @property (weak, nonatomic) IBOutlet KPSlider *drawLoopDurationSlider;
 @property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
+@property (weak, nonatomic) IBOutlet KPSlider *hueSlider;
 
 @property (weak, nonatomic) IBOutlet KPButton *connectionButton;
 @property (weak, nonatomic) IBOutlet UILabel *connectionLabel;
@@ -43,13 +49,17 @@ const CGFloat maxDurationMicros = 1000000;
   self.buttonGrid.delegate = self;
 //  [self.view addSubview:self.buttonGrid];
   
+  _ledColor = [UIColor whiteColor];
+
   
-  self.drawLoopDurationSlider.sliderName = @"Loop Duration";
+  
+  self.drawLoopDurationSlider.sliderName = @"Time Scale";
   self.drillSpeedSlider.sliderName = @"Rotation Speed";
   self.connectionButton.buttonName = @"Connect";
-  self.allOffButton.buttonName = @"Clear All";
+  self.allOffButton.buttonName = @"Clear";
   self.allOnButton.buttonName = @"All On";
   
+  self.hueSlider.sliderName = @"Color";
   
   [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
   
@@ -94,27 +104,47 @@ const CGFloat maxDurationMicros = 1000000;
 
 
 - (IBAction)didChangeDrawLoopDuration:(id)sender {
-  if (self.drawLoopDurationSlider.currentValue == 0) {
-    [KPVortex defaultVortex].drawLoopDuration = 0;
+  [KPVortex defaultVortex].timeScale = self.drawLoopDurationSlider.currentValue;
+//  if (self.drawLoopDurationSlider.currentValue == 0) {
+//    [KPVortex defaultVortex].drawLoopDuration = 0;
+//  }
+//  else {
+//    [KPVortex defaultVortex].drawLoopDuration = KPMap(self.drawLoopDurationSlider.currentValue, (CGFloat)0.0, (CGFloat)1.0, minLoopDurationMicros, maxLoopDurationMicros);
+//    //[KPVortex defaultVortex].drawLoopDuration = pow(10, self.drawLoopDurationSlider.currentValue * 6) * drawLoopDurationMultiplier; // Log
+//  }
+//  
+//  
+}
+
+- (IBAction)didChangeHue:(id)sender {
+  
+  if (self.hueSlider.currentValue == 0) {
+    self.ledColor = [UIColor whiteColor];
   }
   else {
-    //[KPVortex defaultVortex].drawLoopDuration = pow(10, self.drawLoopDurationSlider.currentValue * 6); // Log
+    CGFloat targetHue = self.hueSlider.currentValue + 0.5;
+
+    // Wrap it
+    if (targetHue > 1.0) targetHue = targetHue - 1.0;
+    
+    self.ledColor = [UIColor colorWithHue:targetHue saturation:1.0 brightness:1.0 alpha:1.0];
   }
   
-  
+  self.hueSlider.backgroundColor = self.ledColor;
 }
 
 
-
 - (void)updateInterfaceFromViewModel {
+
     self.drillSpeedSlider.currentValue = [KPVortex defaultVortex].drillSpeed;
-  
-  if ([KPVortex defaultVortex].drawLoopDuration == 0) {
-    self.drawLoopDurationSlider.currentValue = 0;
-  }
-  else {
-    self.drawLoopDurationSlider.currentValue = (log([KPVortex defaultVortex].drawLoopDuration) / log(10)) / 6; // cope with log scale
-  }
+  self.drawLoopDurationSlider.currentValue = [KPVortex defaultVortex].timeScale;
+//  if ([KPVortex defaultVortex].drawLoopDuration == 0) {
+//    self.drawLoopDurationSlider.currentValue = 0;
+//  }
+//  else {
+//    self.drawLoopDurationSlider.currentValue = KPMap([KPVortex defaultVortex].drawLoopDuration, minLoopDurationMicros, maxLoopDurationMicros, (CGFloat)0.0, (CGFloat)1.0);
+//    //self.drawLoopDurationSlider.currentValue = ((log([KPVortex defaultVortex].drawLoopDuration) / log(10)) / 6) / drawLoopDurationMultiplier; // cope with log scale
+//  }
   
     if ([KPVortex defaultVortex].connectionState == CBPeripheralStateConnected) {
         self.connectionLabel.text = @"Connected";
@@ -153,7 +183,7 @@ const CGFloat maxDurationMicros = 1000000;
 
 
 -(void)didActivateGridLocation:(CGPoint)point {
-  [[KPVortex defaultVortex] setLEDatPosition:point toColor:[UIColor whiteColor]];
+  [[KPVortex defaultVortex] setLEDatPosition:point toColor:self.ledColor];
 }
 
 

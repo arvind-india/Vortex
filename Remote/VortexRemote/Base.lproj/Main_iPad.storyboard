@@ -25,6 +25,14 @@
                                     <action selector="didChangeDrawLoopDuration:" destination="BYZ-38-t0r" eventType="valueChanged" id="VbS-yw-IQ8"/>
                                 </connections>
                             </view>
+                            <view contentMode="scaleToFill" id="klD-c8-n9u" customClass="KPSlider">
+                                <rect key="frame" x="20" y="844" width="551" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="didChangeHue:" destination="BYZ-38-t0r" eventType="valueChanged" id="gFC-9t-zMu"/>
+                                </connections>
+                            </view>
                             <view contentMode="scaleToFill" id="mgM-Gw-RHA" customClass="KPSlider">
                                 <rect key="frame" x="20" y="960" width="551" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -42,7 +50,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" id="9R4-oU-6Vd" customClass="KPButton">
-                                <rect key="frame" x="595" y="844" width="153" height="44"/>
+                                <rect key="frame" x="595" y="844" width="153" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -61,10 +69,11 @@
                                 <rect key="frame" x="181" y="919" width="174" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.25554371843434343" green="0.25554371843434343" blue="0.25554371843434343" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -76,6 +85,7 @@
                         <outlet property="connectionLabel" destination="dE9-kT-y5d" id="Btk-7n-iqS"/>
                         <outlet property="drawLoopDurationSlider" destination="8cT-Mo-DPJ" id="Egb-Cc-JDY"/>
                         <outlet property="drillSpeedSlider" destination="mgM-Gw-RHA" id="Pcs-pV-En2"/>
+                        <outlet property="hueSlider" destination="klD-c8-n9u" id="Mdc-LU-wXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

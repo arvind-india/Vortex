@@ -145,6 +145,13 @@
   KP_LOG_FUNCTION
 }
 
+
+- (void)setBackgroundColor:(UIColor *)backgroundColor {
+  _backgroundColor = backgroundColor;
+    self.trackLine.fillColor = [self.backgroundColor CGColor];
+//  [self setNeedsLayout];
+}
+
 - (void)setSliderName:(NSString *)sliderName {
   _sliderName = sliderName;
   self.nameLabel.text = [self.sliderName uppercaseString];
