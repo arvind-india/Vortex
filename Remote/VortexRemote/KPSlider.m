@@ -73,13 +73,13 @@
   // Labels
   _sliderName = @"Slider Name";
   self.nameLabel = [[UILabel alloc] init];
-  self.nameLabel.font = [UIFont fontWithName:@"DIN Alternate" size:40.0];
+  self.nameLabel.font = [UIFont fontWithName:@"DIN Alternate" size:30.0];
   self.nameLabel.textAlignment = NSTextAlignmentLeft;
-  self.nameLabel.text = self.sliderName;
+  self.nameLabel.text = [self.sliderName uppercaseString];
   [self addSubview:self.nameLabel];
   
   self.valueLabel = [[UILabel alloc] init];
-  self.valueLabel.font = [UIFont fontWithName:@"DIN Alternate" size:40.0];
+  self.valueLabel.font = [UIFont fontWithName:@"DIN Alternate" size:30.0];
   self.valueLabel.textAlignment = NSTextAlignmentRight;
   [self addSubview:self.valueLabel];
   
@@ -147,7 +147,7 @@
 
 - (void)setSliderName:(NSString *)sliderName {
   _sliderName = sliderName;
-  self.nameLabel.text = self.sliderName;
+  self.nameLabel.text = [self.sliderName uppercaseString];
   [self setNeedsLayout];
 }
 

@@ -10,6 +10,7 @@
 #import "KPVortex.h"
 #import "KPKit.h"
 #import "KPButtonPad.h"
+#import "KPButton.h"
 #import "KPSlider.h"
 
 @interface KPViewController () <KPButtonPadDelegate>
@@ -26,6 +27,9 @@
 
 @property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
 @property (weak, nonatomic) IBOutlet KPButtonPad *buttonGrid;
+
+@property (weak, nonatomic) IBOutlet KPButton *allOffButton;
+
 
 @end
 

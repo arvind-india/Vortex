@@ -155,6 +155,12 @@ int gridState[rows][cols];
   [self setNeedsDisplay];
 }
 
+
+
+
+
+
+
 //- (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event {
 ////  self.isTouched = NO;
 //  [self setNeedsDisplay];
