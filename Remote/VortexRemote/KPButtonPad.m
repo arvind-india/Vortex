@@ -27,33 +27,48 @@ int gridState[rows][cols];
 {
   self = [super initWithFrame:frame];
   if (self) {
-    // Initialization code
-    _isTouched = NO;
-    _colorDown = [UIColor whiteColor];
-    _colorUp = [UIColor blackColor];
-    
-    for (int x = 0; x < cols; x++) {
-      for (int y = 0; y < rows; y++) {
-        gridState[x][y] = 0;
-      }
-    }
+    [self sharedInit];
   }
   return self;
 }
 
 
-- (void)drawRect:(CGRect)rect
-{
+- (id)initWithCoder:(NSCoder *)aDecoder {
+  self = [super initWithCoder:aDecoder];
+  if (self) {
+    [self sharedInit];
+  }
+  return self;
+}
+
+- (void)sharedInit {
+  // Initialization code
+  _isTouched = NO;
+  _colorDown = [UIColor whiteColor];
+  _colorUp = [UIColor blackColor];
+  self.backgroundColor = [UIColor blackColor];
   
+  for (int x = 0; x < cols; x++) {
+    for (int y = 0; y < rows; y++) {
+      gridState[x][y] = 0;
+    }
+  }
+}
+
+
+
+- (void)drawRect:(CGRect)rect {
   CGFloat gridCellWidth = CGRectGetWidth(self.bounds) / (CGFloat)cols;
   CGFloat gridCellHeight = CGRectGetHeight(self.bounds) / (CGFloat)rows;
   
+  // Cells
   for (int x = 0; x < cols; x++) {
     for (int y = 0; y < rows; y++) {
       
       CGRect gridCellRect = CGRectMake(x * gridCellWidth, y * gridCellHeight, gridCellWidth, gridCellHeight);
+      gridCellRect = CGRectInset(gridCellRect, 2, 2);
       
-      UIBezierPath *gridCell = [UIBezierPath bezierPathWithRect:gridCellRect];
+      UIBezierPath *gridCell = [UIBezierPath bezierPathWithRoundedRect:gridCellRect cornerRadius:6];
       
       if (gridState[x][y] == 0) {
         [self.colorUp setFill];
@@ -96,47 +111,34 @@ int gridState[rows][cols];
 //}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  for (UITouch *touch in touches) {
-    CGPoint touchPoint = [touch locationInView:self];
-
-    CGFloat gridCellWidth = CGRectGetWidth(self.bounds) / (CGFloat)cols;
-    CGFloat gridCellHeight = CGRectGetHeight(self.bounds) / (CGFloat)rows;
-    
-    
-    
-    int gridX = floor(touchPoint.x / gridCellWidth);
-    int gridY = floor(touchPoint.y / gridCellHeight);
-    
-    
-    if (gridState[gridX][gridY] == 0) {
-      gridState[gridX][gridY] = 1;
-      if ([self.delegate respondsToSelector:@selector(didActivateGridLocation:)]) {
-        [self.delegate didActivateGridLocation:CGPointMake(gridX, gridY)];
-      }
-    }
-    
-  }
-  [self updateViewFromGridState];
+  [self dealWithTouches:touches];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+  [self dealWithTouches:touches];
+}
+
+- (void)dealWithTouches:(NSSet *)touches {
   for (UITouch *touch in touches) {
     CGPoint touchPoint = [touch locationInView:self];
-    
-    CGFloat gridCellWidth = CGRectGetWidth(self.bounds) / (CGFloat)cols;
-    CGFloat gridCellHeight = CGRectGetHeight(self.bounds) / (CGFloat)rows;
-    
-    int gridX = floor(touchPoint.x / gridCellWidth);
-    int gridY = floor(touchPoint.y / gridCellHeight);
 
-    if (gridState[gridX][gridY] == 0) {
-      gridState[gridX][gridY] = 1;
-      if ([self.delegate respondsToSelector:@selector(didActivateGridLocation:)]) {
-        [self.delegate didActivateGridLocation:CGPointMake(gridX, gridY)];
+    if ((touchPoint.x <= CGRectGetWidth(self.bounds)) && (touchPoint.y <= CGRectGetHeight(self.bounds))) {
+      CGFloat gridCellWidth = CGRectGetWidth(self.bounds) / (CGFloat)cols;
+      CGFloat gridCellHeight = CGRectGetHeight(self.bounds) / (CGFloat)rows;
+      
+      int gridX = floor(touchPoint.x / gridCellWidth);
+      int gridY = floor(touchPoint.y / gridCellHeight);
+      
+      if (gridState[gridX][gridY] == 0) {
+        gridState[gridX][gridY] = 1;
+        if ([self.delegate respondsToSelector:@selector(didActivateGridLocation:)]) {
+          [self.delegate didActivateGridLocation:CGPointMake(gridX, gridY)];
+        }
       }
+      
     }
+    [self updateViewFromGridState];
   }
-  [self updateViewFromGridState];
 }
 
 - (void)clearGrid {

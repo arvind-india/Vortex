@@ -10,6 +10,7 @@
 #import "KPVortex.h"
 #import "KPKit.h"
 #import "KPButtonPad.h"
+#import "KPSlider.h"
 
 @interface KPViewController () <KPButtonPadDelegate>
 
@@ -17,14 +18,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *connectionLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *drillSpeedLabel;
-@property (weak, nonatomic) IBOutlet UISlider *drillSpeedSlider;
 @property (weak, nonatomic) IBOutlet UIStepper *drillSpeedStepper;
 
 @property (weak, nonatomic) IBOutlet UILabel *blinkIntervalLabel;
 @property (weak, nonatomic) IBOutlet UISlider *blinkIntervalSlider;
 @property (weak, nonatomic) IBOutlet UIStepper *blinkIntervalStepper;
 
-@property (strong, nonatomic) KPButtonPad *buttonGrid;
+@property (weak, nonatomic) IBOutlet KPSlider *drillSpeedSlider;
+@property (weak, nonatomic) IBOutlet KPButtonPad *buttonGrid;
 
 @end
 
@@ -34,9 +35,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
   
-  self.buttonGrid = [[KPButtonPad alloc] initWithFrame:CGRectMake(0, 350, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 350)];
+  //self.buttonGrid = [[KPButtonPad alloc] initWithFrame:CGRectMake(0, 350, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 350)];
   self.buttonGrid.delegate = self;
-  [self.view addSubview:self.buttonGrid];
+//  [self.view addSubview:self.buttonGrid];
+  
+  [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,7 +93,7 @@
 - (void)updateInterfaceFromViewModel {
     self.drillSpeedLabel.text = [NSString stringWithFormat:@"%i%%", (NSUInteger)([KPVortex defaultVortex].drillSpeed * 100)];
     self.drillSpeedStepper.value = [KPVortex defaultVortex].drillSpeed;
-    self.drillSpeedSlider.value = [KPVortex defaultVortex].drillSpeed;
+    self.drillSpeedSlider.currentValue = [KPVortex defaultVortex].drillSpeed;
     
     NSString *blinkLabel;
     if ([KPVortex defaultVortex].blinkInterval < 1000) {
