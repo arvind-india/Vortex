@@ -3,11 +3,21 @@
 
 // Inbound commands from iPad bluetooth
 const char SET_DRILL_SPEED = 'd'; // float from 0 to 1
-const int SET_LED_BLINK_INTERVAL = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second.
+const int SET_LED_BLINK_INTERVAL = 'b'; // int, microseconds ... 1000 is a millisecond, 1000000 is a second
+const int SET_LEDS_ALL_ON = 'o'; // no params
+const int SET_LEDS_ALL_OFF = 'c'; // no params
+const int SET_LED = 's'; // XXX address XXX red XXX green XXX blue
+
+const int SET_LEDS_ALL_HUE = 'h'; // XXX hue
+const int SET_LEDS_ALL_SATURATION = 't'; // XXX sat
+const int SET_LEDS_ALL_BRIGHTNESS = 'r'; // XXX bright
+
+
+// IF YOU CHANGE THESE NUMBERS YOU WILL DAMAGE THE SERVO!!!
+const float servoMin = 40.0;
+const float servoMax = 150.0;
 
 int blinkIntervalMicroseconds;
-
-
 
 // #define FORCE_SOFTWARE_SPI
 // #define FORCE_SOFTWARE_PINS
@@ -46,22 +56,21 @@ void setup() {
   // Set up stuff
   Serial1.begin(57600);
   drillTriggerServo.attach(SERVO_PIN);  // attaches the servo on pin 9 to the servo object
-  
-  
+
   //  Serial1.println("Hello from the shaft");  
 } 
  
 void loop() { 
   readSerial(); 
   
-  allLEDsOn();
+//  allLEDsOn();
   
-  // Flash the lights for testing purposes
-  if (blinkIntervalMicroseconds > 0) {
-    delayMicrosecondsFixed(blinkIntervalMicroseconds);    
-    allLEDsOff();
-    delayMicrosecondsFixed(blinkIntervalMicroseconds);
-  }
+//  // Flash the lights for testing purposes
+//  if (blinkIntervalMicroseconds > 0) {
+//    delayMicrosecondsFixed(blinkIntervalMicroseconds);    
+//    allLEDsOff();
+//    delayMicrosecondsFixed(blinkIntervalMicroseconds);
+//  }
 }
 
 String incomingSerialPacket = "";
@@ -106,7 +115,36 @@ void receivedPacket(String packet) {
       body.toCharArray(bodyChars, sizeof(bodyChars));
       blinkIntervalMicroseconds = atoi(bodyChars);
       break;
+    }
+    case SET_LEDS_ALL_ON: {
+      allLEDsOn();
+      break;
     }    
+    case SET_LEDS_ALL_OFF: {
+      allLEDsOff();
+      break;   
+    }
+    case SET_LED: {
+      int pixelAddress = body.substring(0, 3).toInt();
+      int redValue = body.substring(3, 6).toInt();      
+      int greenValue = body.substring(6, 9).toInt();
+      int blueValue = body.substring(9, 12).toInt();
+      
+      CRGB pixelColor = CRGB(redValue, greenValue, blueValue);
+      leds[pixelAddress] = pixelColor;
+      FastLED.show();        
+      break;
+    }
+    case SET_LEDS_ALL_HUE: {
+//      int hueValue = body.toInt();          
+//       for(int i = 0; i < NUM_LEDS; i++) {
+//         CHSV pixelsHSV = CHSV(leds[i]);
+//         pixelsHSV.hue = hueValue;
+//         hsv2rgb_spectrum(hueValue, leds[i]);
+//      }
+//      FastLED.show();
+      break;      
+    }
     default: {
       // Throw an error if header is unknown
       //String errorMessage = "UnknownCommand:";
@@ -118,7 +156,7 @@ void receivedPacket(String packet) {
 
 void setDrillSpeedNormalized(float drillSpeed) {
   // Turn drill speed to servo position
-  int servoPosition = round(mapfloat(drillSpeed, 0.0, 1.0, 0.0, 179.0));
+  int servoPosition = round(mapfloat(drillSpeed, 0.0, 1.0, servoMin, servoMax));
   drillTriggerServo.write(servoPosition);
 }  
   
@@ -144,6 +182,9 @@ void delayMicrosecondsFixed(int duration) {
     delay(blinkIntervalMicroseconds / 1000);
   }
 }
+
+
+
 
 void allLEDsOff() {
   for(int i = 0; i < NUM_LEDS; i++) {

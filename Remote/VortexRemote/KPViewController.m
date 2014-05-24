@@ -8,8 +8,10 @@
 
 #import "KPViewController.h"
 #import "KPVortex.h"
+#import "KPKit.h"
+#import "KPButtonPad.h"
 
-@interface KPViewController ()
+@interface KPViewController () <KPButtonPadDelegate>
 
 // Controls
 @property (weak, nonatomic) IBOutlet UILabel *connectionLabel;
@@ -22,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UISlider *blinkIntervalSlider;
 @property (weak, nonatomic) IBOutlet UIStepper *blinkIntervalStepper;
 
+@property (strong, nonatomic) KPButtonPad *buttonGrid;
+
 @end
 
 @implementation KPViewController
@@ -29,6 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+  
+  self.buttonGrid = [[KPButtonPad alloc] initWithFrame:CGRectMake(0, 350, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 350)];
+  self.buttonGrid.delegate = self;
+  [self.view addSubview:self.buttonGrid];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -114,4 +122,31 @@
 
 
 
+- (IBAction)didTouchStepAndOnButton:(id)sender {
+  static NSUInteger indexStep = 0;
+  
+  UIColor *randomColor = [KPKit randomColorWithAlpha:1.0];
+  [[KPVortex defaultVortex] setLEDatIndex:indexStep toColor:randomColor];
+  
+  indexStep++;
+  indexStep %= 255;
+}
+
+- (IBAction)didTouchAllOnButton:(id)sender {
+  [[KPVortex defaultVortex] setAllLEDsOn];
+}
+
+- (IBAction)didTouchAllOffButton:(id)sender {
+   [[KPVortex defaultVortex] setAllLEDsOff];
+  [self.buttonGrid clearGrid];
+}
+
+
+-(void)didActivateGridLocation:(CGPoint)point {
+  [[KPVortex defaultVortex] setLEDatPosition:point toColor:[UIColor whiteColor]];
+}
+
+
 @end
+
+

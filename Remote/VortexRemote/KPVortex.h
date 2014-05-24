@@ -22,4 +22,9 @@
 @property (nonatomic, assign) CGFloat drillSpeedMinimum;
 @property (nonatomic, assign) CGFloat drillSpeedMaximum;
 
+- (void)setAllLEDsOn;
+- (void)setAllLEDsOff;
+- (void)setLEDatPosition:(CGPoint)position toColor:(UIColor *)color;
+- (void)setLEDatIndex:(NSUInteger)index toColor:(UIColor *)color;
+
 @end

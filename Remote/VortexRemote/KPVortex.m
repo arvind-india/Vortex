@@ -9,6 +9,10 @@
 #import "KPVortex.h"
 #import "BLE.h"
 
+
+const NSUInteger ledRows = 16;
+const NSUInteger ledColumns = 16;
+
 @interface KPVortex () <BLEDelegate>
 
 @property (nonatomic, strong) BLE *bleMini;
@@ -98,10 +102,9 @@
     [NSTimer scheduledTimerWithTimeInterval:(float)3.0 target:self selector:@selector(connectionTimer:) userInfo:nil repeats:NO];
 }
 
-
-
 - (void)sendMessageToBle:(NSString *)message {
-    
+  NSLog(@"Sending message: %@", message);
+  
     NSString *s;
     NSData *d;
     
@@ -133,6 +136,38 @@
     // Send the message
     NSString *message = [NSString stringWithFormat:@"b%lu\n", (unsigned long)self.blinkInterval];
     [self sendMessageToBle:message];
+}
+
+- (void)setAllLEDsOn {
+  // Send the message
+  NSString *message = [NSString stringWithFormat:@"o\n"];
+  [self sendMessageToBle:message];
+}
+
+- (void)setAllLEDsOff {
+  NSString *message = [NSString stringWithFormat:@"c\n"];
+  [self sendMessageToBle:message];
+}
+
+- (void)setLEDatPosition:(CGPoint)position toColor:(UIColor *)color {
+  // Convert point to array address...
+  NSUInteger ledIndex = (((ledRows - 1) - position.y) * ledColumns) + position.x;
+  [self setLEDatIndex:ledIndex toColor:color];
+}
+
+- (void)setLEDatIndex:(NSUInteger)index toColor:(UIColor *)color {
+  // TODO lookup table to map to "real" index?
+  CGFloat r, g, b, a;
+  [color getRed:&r green:&g blue:&b alpha:&a];
+  
+  NSUInteger redComponent = (NSUInteger)(r * 255.0);
+  NSUInteger greenComponent = (NSUInteger)(g * 255.0);
+  NSUInteger blueComponent = (NSUInteger)(b * 255.0);
+  
+  NSString *message = [NSString stringWithFormat:@"s%03i%03i%03i%03i\n", index, redComponent, greenComponent, blueComponent];
+  
+  [self sendMessageToBle:message];
+  
 }
 
 
