@@ -123,7 +123,22 @@ int gridState[rows][cols];
 //
 //}
 
+
+bool draggingErases = false;
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+  
+  // Doesn't work right since multiple timings aren't stored for a single LED.
+//  for (UITouch *touch in touches) {
+//    CGPoint touchPoint = [touch locationInView:self];
+//    if ([self locationIsOn:touchPoint]) {
+//      draggingErases = YES;
+//    }
+//    else {
+//      draggingErases = NO;
+//    }
+//  }
+  
   [self dealWithTouches:touches];
 }
 
@@ -131,10 +146,11 @@ int gridState[rows][cols];
   [self dealWithTouches:touches];
 }
 
+
 - (void)dealWithTouches:(NSSet *)touches {
   for (UITouch *touch in touches) {
     CGPoint touchPoint = [touch locationInView:self];
-
+    
     if ((touchPoint.x <= CGRectGetWidth(self.bounds)) && (touchPoint.y <= CGRectGetHeight(self.bounds))) {
       CGFloat gridCellWidth = CGRectGetWidth(self.bounds) / (CGFloat)cols;
       CGFloat gridCellHeight = CGRectGetHeight(self.bounds) / (CGFloat)rows;
@@ -142,17 +158,42 @@ int gridState[rows][cols];
       int gridX = floor(touchPoint.x / gridCellWidth);
       int gridY = floor(touchPoint.y / gridCellHeight);
       
-      if (gridState[gridX][gridY] == 0) {
-        gridState[gridX][gridY] = 1;
-        if ([self.delegate respondsToSelector:@selector(didActivateGridLocation:)]) {
-          [self.delegate didActivateGridLocation:CGPointMake(gridX, gridY)];
+      if (draggingErases) {
+        if (gridState[gridX][gridY] == 1) {
+          gridState[gridX][gridY] = 0;
+          if ([self.delegate respondsToSelector:@selector(didDeactivateGridLocation:)]) {
+            [self.delegate didDeactivateGridLocation:CGPointMake(gridX, gridY)];
+          }
         }
       }
-      
+      else {
+        if (gridState[gridX][gridY] == 0) {
+          gridState[gridX][gridY] = 1;
+          if ([self.delegate respondsToSelector:@selector(didActivateGridLocation:)]) {
+            [self.delegate didActivateGridLocation:CGPointMake(gridX, gridY)];
+          }
+        }
+      }
+
     }
     [self updateViewFromGridState];
   }
 }
+
+- (BOOL)locationIsOn:(CGPoint)touchPoint {
+  if ((touchPoint.x <= CGRectGetWidth(self.bounds)) && (touchPoint.y <= CGRectGetHeight(self.bounds))) {
+    CGFloat gridCellWidth = CGRectGetWidth(self.bounds) / (CGFloat)cols;
+    CGFloat gridCellHeight = CGRectGetHeight(self.bounds) / (CGFloat)rows;
+    
+    int gridX = floor(touchPoint.x / gridCellWidth);
+    int gridY = floor(touchPoint.y / gridCellHeight);
+    
+    return (gridState[gridX][gridY] == 1);
+  }
+  return NO;
+}
+
+
 
 - (void)clearGrid {
   for (int x = 0; x < cols; x++) {

@@ -183,6 +183,11 @@ const CGFloat drawLoopDurationMultiplier = 1.0;
   [[KPVortex defaultVortex] setLEDatPosition:point toColor:ledColor];
 }
 
+-(void)didDeactivateGridLocation:(CGPoint)point {
+  UIColor *ledColor = [UIColor colorWithHue:0 saturation:0 brightness:1.0 / 255.0 alpha:1.0];
+  [[KPVortex defaultVortex] setLEDatPosition:point toColor:ledColor];
+}
+
 
 @end
 

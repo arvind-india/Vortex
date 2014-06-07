@@ -11,6 +11,7 @@
 @protocol KPButtonPadDelegate <NSObject>
 
 -(void)didActivateGridLocation:(CGPoint)point;
+-(void)didDeactivateGridLocation:(CGPoint)point;
 
 @end
 
